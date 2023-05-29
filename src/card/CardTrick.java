@@ -24,6 +24,8 @@ public class CardTrick {
         Card[] magicHand = new Card[7];
         Scanner scan =new Scanner(System.in);
         
+        String luckyCard= "1 Hearts";
+        
         
         
         for (int i=0; i<magicHand.length; i++)
@@ -35,7 +37,7 @@ public class CardTrick {
             c.setSuit(Card.SUITS[(int)(Math.random()*3+0)]);
             
             magicHand[i]=c;
-            System.out.println("Random card"+magicHand[i].getSuit()+""+magicHand[i].getValue());
+            System.out.println("Random card is "+magicHand[i].getSuit()+" "+magicHand[i].getValue());
         }
         
         
@@ -47,18 +49,23 @@ public class CardTrick {
         String userSuit=scan.next();
         
         
+        System.out.println("User Card ="+userValue+" "+userSuit);
        
         // and search magicHand here
-        for (int i=0; i<magicHand.length; i++){
-            if(userValue==magicHand[i].getValue() ||userSuit.equals(magicHand[i].getSuit())){
-                System.out.println("Card Matches");
-            }
-            else {
-                System.out.println("Card does not match");
+       boolean found = false;
+        for (int i = 0; i < magicHand.length; i++) {
+            if (userValue == magicHand[i].getValue() && userSuit.equals(magicHand[i].getSuit()) || luckyCard.equals(magicHand[i].getValue()+""+magicHand[i].getSuit()) {
+                found = true;
+                break;
             }
         }
-        
-        //Then report the result here
+
+        // Report the result here
+        if (found) {
+            System.out.println("Card matches!");
+        } else {
+            System.out.println("Card does not match.");
+        }
     }
     
 }
